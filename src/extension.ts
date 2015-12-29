@@ -21,10 +21,9 @@ export function activate(context: vscode.ExtensionContext) {
         var fileNameOnly = fileName.split('\.')[0];
                 
         var inFile = path + fileName;
-        var outExt;
         
         let items: vscode.QuickPickItem[] = [];
-        items.push({ label: 'pdf', description: 'Render as pdf document' });
+        items.push({ label: 'pdf',  description: 'Render as pdf document'  });
         items.push({ label: 'docx', description: 'Render as word document' });
         items.push({ label: 'html', description: 'Render as html document' });
                                  
