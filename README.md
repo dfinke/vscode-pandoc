@@ -1,6 +1,6 @@
 # vscode-Pandoc
 
-[Visual Studio Code](https://code.visualstudio.com/) extension lets you easily render markdown files as a `pdf`,`word document` or `html` file.
+[Visual Studio Code](https://code.visualstudio.com/) extension lets you easily render markdown files as a `pdf`, `word document` or `html` file.
 
 You need to [install Pandoc](http://pandoc.org/installing.html) - a universal document converter.
 

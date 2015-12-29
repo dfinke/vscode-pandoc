@@ -1,8 +1,22 @@
 {
 	"name": "vscode-pandoc",
 	"description": "Renders markdown through pandoc",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"publisher": "DougFinke",
+	"icon": "images/logo.png",
+	
+	"license": "SEE LICENSE",
+
+	"bugs": {
+		"url": "https://github.com/dfinke/vscode-pandoc/issues",
+		"email": "finked@hotmail.com"
+	},
+	"homepage": "https://github.com/dfinke/vscode-pandoc/blob/master/README.md",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/dfinke/vscode-pandoc.git"      
+	},
+	
 	"engines": {
 		"vscode": "^0.10.1"
 	},
