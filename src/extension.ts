@@ -1,9 +1,9 @@
 import * as vscode from 'vscode'; 
 import {spawn, exec} from 'child_process';
 
-function setStatusBarText( what, docType){
+function setStatusBarText(what, docType){
     var date=new Date();
-    var text = what + ' [' + docType + '] ' + date.toLocaleTimeString();
+    var text=what + ' [' + docType + '] ' + date.toLocaleTimeString();
     vscode.window.setStatusBarMessage(text, 1500);  
 }
 
@@ -54,7 +54,7 @@ export function activate(context: vscode.ExtensionContext) {
                 }
             });
         });
-	});
+});
 	
-	context.subscriptions.push(disposable);
+context.subscriptions.push(disposable);
 }
