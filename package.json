@@ -1,0 +1,37 @@
+{
+	"name": "vscode-pandoc",
+	"description": "Renders markdown through pandoc",
+	"version": "0.0.1",
+	"publisher": "DougFinke",
+	"engines": {
+		"vscode": "^0.10.1"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [		
+         "onLanguage:markdown"
+	],
+	"main": "./out/src/extension",
+	"contributes": {
+        "keybindings": [
+            {
+                "command": "pandoc.render",            
+                "key": "ctrl+K P",
+                "when": "editorTextFocus && editorLangId == 'markdown'"
+            }	
+        ],
+		"commands": [{
+			"command": "pandoc.render",
+			"title": "Pandoc Render"
+		}]
+	},
+	"scripts": {
+		"vscode:prepublish": "node ./node_modules/vscode/bin/compile",
+		"compile": "node ./node_modules/vscode/bin/compile -watch -p ./"
+	},
+	"devDependencies": {
+		"typescript": "^1.6.2",
+		"vscode": "0.10.x"
+	}
+}
