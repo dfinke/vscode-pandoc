@@ -50,13 +50,13 @@ export function activate(context: vscode.ExtensionContext) {
                     setStatusBarText('Launching', qpSelection.label);
                     switch(process.platform) {
                       case 'darwin':
-                      exec('open ' + outFile);
-                      break;
+                        exec('open ' + outFile);
+                        break;
                       case 'linux':
-                      exec('xdg-open ' + outFile);
-                      break;
+                        exec('xdg-open ' + outFile);
+                        break;
                       default:
-                      exec(outFile);
+                        exec(outFile);
                     }
                 }
             });
