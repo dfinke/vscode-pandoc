@@ -1,5 +1,11 @@
 # vscode-Pandoc
 
+## Releases
+
+* January 16, 2016
+ * Handling of the path that contains spaces
+ * Add the open command (xdg-open) in linux
+
 [Visual Studio Code](https://code.visualstudio.com/) extension lets you easily render markdown files as a `pdf`, `word document` or `html` file.
 
 You need to [install Pandoc](http://pandoc.org/installing.html) - a universal document converter.
