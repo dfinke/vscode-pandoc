@@ -48,10 +48,15 @@ export function activate(context: vscode.ExtensionContext) {
                     console.log('exec error: ' + error);
                 } else {
                     setStatusBarText('Launching', qpSelection.label);
-                    if (process.platform == 'darwin') {
-                        exec('open ' + outFile);
-                    } else {
-                        exec(outFile);
+                    switch(process.platform) {
+                      case 'darwin':
+                      exec('open ' + outFile);
+                      break;
+                      case 'linux':
+                      exec('xdg-open ' + outFile);
+                      break;
+                      default:
+                      exec(outFile);
                     }
                 }
             });
