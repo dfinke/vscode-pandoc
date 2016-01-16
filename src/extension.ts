@@ -19,7 +19,6 @@ export function activate(context: vscode.ExtensionContext) {
         var filePath = path.dirname(fullName);
         var fileName = path.basename(fullName);
         var fileNameOnly = path.parse(fileName).name;
-        var inFile = path.join(filePath, fileName);
         
         let items: vscode.QuickPickItem[] = [];
         items.push({ label: 'pdf',  description: 'Render as pdf document'  });
@@ -33,8 +32,31 @@ export function activate(context: vscode.ExtensionContext) {
             var inFile = path.join(filePath, fileName).replace(/ /g, '\\ ');
             var outFile = path.join(filePath, fileNameOnly).replace(/ /g, '\\ ') + '.' + qpSelection.label;
             
+            // Stores the contribution objects in package.json
+            var pdocOptions;
+            
+            switch (qpSelection.label) {
+              case 'pdf':
+                pdocOptions = vscode.workspace.getConfiguration('pandoc').get('pdfOptString');
+                console.log('pdocOptstring = ' + pdocOptions);
+                break;
+              case 'docx':
+                pdocOptions = vscode.workspace.getConfiguration('pandoc').get('docxOptString');
+                console.log('pdocOptstring = ' + pdocOptions);
+                break;
+              case 'html':
+                pdocOptions = vscode.workspace.getConfiguration('pandoc').get('htmlOptString');
+                console.log('pdocOptstring = ' + pdocOptions);
+                break;
+            }
+            
             setStatusBarText('Generating', qpSelection.label);
-            var child = exec('pandoc ' + inFile + ' -o ' + outFile, function(error, stdout, stderr) {
+            
+            // debug
+            console.log('debug: outFile = ' + inFile);
+            console.log('debug: inFile = ' + outFile);
+            console.log('debug: pandoc ' + inFile + ' -o ' + outFile + pdocOptions);
+            var child = exec('pandoc' + '\x20' + inFile + '\x20' + '-o' + '\x20' + outFile + '\x20' + pdocOptions, function(error, stdout, stderr) {
                 
                 if (stdout !== null) {
                     console.log(stdout.toString());
