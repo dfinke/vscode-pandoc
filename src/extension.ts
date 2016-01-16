@@ -1,7 +1,6 @@
 import * as vscode from 'vscode'; 
 import {spawn, exec} from 'child_process';
 import * as path from 'path';
-import * as fs from 'fs';
 
 function setStatusBarText(what, docType){
     var date=new Date();
@@ -21,7 +20,7 @@ export function activate(context: vscode.ExtensionContext) {
         var fileName = path.basename(fullName);
         var fileNameOnly = path.parse(fileName).name;
         var inFile = path.join(filePath, fileName);
-
+        
         let items: vscode.QuickPickItem[] = [];
         items.push({ label: 'pdf',  description: 'Render as pdf document'  });
         items.push({ label: 'docx', description: 'Render as word document' });
@@ -31,8 +30,8 @@ export function activate(context: vscode.ExtensionContext) {
             if (!qpSelection) {
                 return;
             }
-                    
-            var outFile = path.join(filePath,fileNameOnly) + '.' + qpSelection.label;
+            var inFile = path.join(filePath, fileName).replace(/ /g, '\\ ');
+            var outFile = path.join(filePath, fileNameOnly).replace(/ /g, '\\ ') + '.' + qpSelection.label;
             
             setStatusBarText('Generating', qpSelection.label);
             var child = exec('pandoc ' + inFile + ' -o ' + outFile, function(error, stdout, stderr) {
