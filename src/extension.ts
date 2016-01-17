@@ -8,6 +8,27 @@ function setStatusBarText(what, docType){
     vscode.window.setStatusBarMessage(text, 1500);
 }
 
+function getPandocOptions(quickPickLabel) {
+    var pandocOptions;
+    
+    switch (quickPickLabel) {
+        case 'pdf':
+            pandocOptions = vscode.workspace.getConfiguration('pandoc').get('pdfOptString');
+            console.log('pdocOptstring = ' + pandocOptions);
+            break;
+        case 'docx':
+            pandocOptions = vscode.workspace.getConfiguration('pandoc').get('docxOptString');
+            console.log('pdocOptstring = ' + pandocOptions);
+            break;
+        case 'html':
+            pandocOptions = vscode.workspace.getConfiguration('pandoc').get('htmlOptString');
+            console.log('pdocOptstring = ' + pandocOptions);
+            break;
+    }
+    
+    return pandocOptions;
+}
+
 export function activate(context: vscode.ExtensionContext) {
 
 	console.log('Congratulations, your extension "vscode-pandoc" is now active!'); 
@@ -29,35 +50,25 @@ export function activate(context: vscode.ExtensionContext) {
             if (!qpSelection) {
                 return;
             }
+            
             var inFile = path.join(filePath, fileName).replace(/ /g, '\\ ');
-            var outFile = path.join(filePath, fileNameOnly).replace(/ /g, '\\ ') + '.' + qpSelection.label;
-            
-            // Stores the contribution objects in package.json
-            var pdocOptions;
-            
-            switch (qpSelection.label) {
-              case 'pdf':
-                pdocOptions = vscode.workspace.getConfiguration('pandoc').get('pdfOptString');
-                console.log('pdocOptstring = ' + pdocOptions);
-                break;
-              case 'docx':
-                pdocOptions = vscode.workspace.getConfiguration('pandoc').get('docxOptString');
-                console.log('pdocOptstring = ' + pdocOptions);
-                break;
-              case 'html':
-                pdocOptions = vscode.workspace.getConfiguration('pandoc').get('htmlOptString');
-                console.log('pdocOptstring = ' + pdocOptions);
-                break;
-            }
+            var outFile = path.join(filePath, fileNameOnly).replace(/ /g, '\\ ') + '.' + qpSelection.label;            
             
             setStatusBarText('Generating', qpSelection.label);
+            
+            var pandocOptions = getPandocOptions(qpSelection.label);
             
             // debug
             console.log('debug: outFile = ' + inFile);
             console.log('debug: inFile = ' + outFile);
-            console.log('debug: pandoc ' + inFile + ' -o ' + outFile + pdocOptions);
-            var child = exec('pandoc' + '\x20' + inFile + '\x20' + '-o' + '\x20' + outFile + '\x20' + pdocOptions, function(error, stdout, stderr) {
-                
+            console.log('debug: pandoc ' + inFile + ' -o ' + outFile + pandocOptions);
+            
+            var space = '\x20';            
+            var targetExec = 'pandoc' + space + inFile + space + '-o' + space + outFile + space + pandocOptions;
+            console.log('debug: exec ' + targetExec);
+            
+            var child = exec(targetExec, function(error, stdout, stderr) {
+                                
                 if (stdout !== null) {
                     console.log(stdout.toString());
                 }
