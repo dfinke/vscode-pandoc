@@ -1,7 +1,8 @@
 {
 	"name": "vscode-pandoc",
 	"description": "Renders markdown through pandoc",
-	"version": "0.0.4",
+	"version": "0.0.5",
+
 	"publisher": "DougFinke",
 	"icon": "images/logo.png",
 	
@@ -28,14 +29,35 @@
 	],
 	"main": "./out/src/extension",
 	"contributes": {
-        "keybindings": [
-            {
-                "command": "pandoc.render",            
-                "key": "ctrl+K P",
-                "when": "editorTextFocus && editorLangId == 'markdown'"
-            }	
-        ],
-		"commands": [{
+     "configuration": {
+       "type": "object",
+       "title": "Pandoc Option Configuration",
+       "properties": {
+         "pandoc.pdfOptString": {
+           "type": "string",
+           "default": "",
+           "description": "pandoc .pdf output option template that you would like to use"
+          },
+          "pandoc.docxOptString": {
+            "type": "string",
+            "default": "",
+            "description": "pandoc .docx output option template that you would like to use"
+          },
+          "pandoc.htmlOptString": {
+            "type": "string",
+            "default": "",
+            "description": "pandoc .html output option template that you would like to use"
+          }
+       }
+     },
+     "keybindings": [
+       {
+         "command": "pandoc.render",            
+         "key": "ctrl+K P",
+         "when": "editorTextFocus && editorLangId == 'markdown'"
+       }	
+     ],
+     "commands": [{
 			"command": "pandoc.render",
 			"title": "Pandoc Render"
 		}]
