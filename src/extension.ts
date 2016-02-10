@@ -51,8 +51,8 @@ export function activate(context: vscode.ExtensionContext) {
                 return;
             }
             
-            var inFile = path.join(filePath, fileName).replace(/ /g, '\\ ');
-            var outFile = path.join(filePath, fileNameOnly).replace(/ /g, '\\ ') + '.' + qpSelection.label;            
+            var inFile = path.join(filePath, fileName).replace(/(^.*$)/gm,"\"" + "$1" + "\"");
+            var outFile = (path.join(filePath, fileNameOnly) + '.' + qpSelection.label).replace(/(^.*$)/gm,"\"" + "$1" + "\"");
             
             setStatusBarText('Generating', qpSelection.label);
             
