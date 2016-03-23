@@ -67,7 +67,7 @@ export function activate(context: vscode.ExtensionContext) {
             var targetExec = 'pandoc' + space + inFile + space + '-o' + space + outFile + space + pandocOptions;
             console.log('debug: exec ' + targetExec);
             
-            var child = exec(targetExec, function(error, stdout, stderr) {
+            var child = exec(targetExec, { cwd: filePath }, function(error, stdout, stderr) {
                                 
                 if (stdout !== null) {
                     console.log(stdout.toString());
