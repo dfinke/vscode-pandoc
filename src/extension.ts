@@ -2,6 +2,8 @@ import * as vscode from 'vscode';
 import {spawn, exec} from 'child_process';
 import * as path from 'path';
 
+var pandocOutputChannel = vscode.window.createOutputChannel('Pandoc');
+
 function setStatusBarText(what, docType){
     var date=new Date();
     var text=what + ' [' + docType + '] ' + date.toLocaleTimeString();
@@ -45,7 +47,7 @@ export function activate(context: vscode.ExtensionContext) {
         items.push({ label: 'pdf',  description: 'Render as pdf document'  });
         items.push({ label: 'docx', description: 'Render as word document' });
         items.push({ label: 'html', description: 'Render as html document' });
-                                 
+
         vscode.window.showQuickPick(items).then((qpSelection) => {
             if (!qpSelection) {
                 return;
@@ -67,18 +69,24 @@ export function activate(context: vscode.ExtensionContext) {
             var targetExec = 'pandoc' + space + inFile + space + '-o' + space + outFile + space + pandocOptions;
             console.log('debug: exec ' + targetExec);
             
-            var child = exec(targetExec, function(error, stdout, stderr) {
-                                
+            var child = exec(targetExec, { cwd: filePath }, function(error, stdout, stderr) {
                 if (stdout !== null) {
                     console.log(stdout.toString());
+                    pandocOutputChannel.append(stdout.toString() + '\n');
                 }
                 
                 if (stderr !== null) {
                     console.log(stderr.toString());
+                    if (stderr !== "") {
+                    vscode.window.showErrorMessage('stderr: ' + stderr.toString());
+                    pandocOutputChannel.append('stderr: ' + stderr.toString() + '\n');
+                    }
                 }
                 
                 if (error !== null) {
                     console.log('exec error: ' + error);
+                    vscode.window.showErrorMessage('exec error: ' + error);
+                    pandocOutputChannel.append('exec error: ' + error + '\n');
                 } else {
                     setStatusBarText('Launching', qpSelection.label);
                     switch(process.platform) {
