@@ -1,7 +1,7 @@
 {
 	"name": "vscode-pandoc",
 	"description": "Renders markdown through pandoc",
-	"version": "0.0.7",
+	"version": "0.0.8",
 
 	"publisher": "DougFinke",
 	"icon": "images/logo.png",
