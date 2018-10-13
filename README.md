@@ -35,12 +35,12 @@ Then choose from the list what document type you want to render and press `enter
 
 ## **Setting additional pandoc options**
 
-1. choose 'Preference -> UserSettings'
-1. Find: pandoc in Default Settings
-1. Copy and paste
-1. to settings.json
+1. Choose 'File -> Preference -> Settings'
+2. Open `settings.json` (button with three dots in the top right corner on the Settings screen)
+3. Find `pandoc` in Default User Settings
+4. Copy and paste to `settings.json`
 
-example:
+Example:
 
 ```json
 //-------- Pandoc Option Configuration --------

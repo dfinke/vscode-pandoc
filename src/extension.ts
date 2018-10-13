@@ -12,18 +12,33 @@ function setStatusBarText(what, docType){
 
 function getPandocOptions(quickPickLabel) {
     var pandocOptions;
-    
+    var pandocConfiguration = vscode.workspace.getConfiguration('pandoc');
     switch (quickPickLabel) {
         case 'pdf':
-            pandocOptions = vscode.workspace.getConfiguration('pandoc').get('pdfOptString');
+            if (pandocConfiguration.has('pdfOptString')) {
+                pandocOptions = pandocConfiguration.get('pdfOptString');
+            }
+            else {
+                pandocOptions = '';
+            }
             console.log('pdocOptstring = ' + pandocOptions);
             break;
         case 'docx':
-            pandocOptions = vscode.workspace.getConfiguration('pandoc').get('docxOptString');
+            if (pandocConfiguration.has('docxOptString')) {
+                pandocOptions = pandocConfiguration.get('docxOptString');
+            }
+            else {
+                pandocOptions = '';
+            }
             console.log('pdocOptstring = ' + pandocOptions);
             break;
         case 'html':
-            pandocOptions = vscode.workspace.getConfiguration('pandoc').get('htmlOptString');
+            if (pandocConfiguration.has('htmlOptString')) {
+                pandocOptions = pandocConfiguration.get('htmlOptString');
+            }
+            else {
+                pandocOptions = '';
+            }
             console.log('pdocOptstring = ' + pandocOptions);
             break;
     }
@@ -59,6 +74,9 @@ export function activate(context: vscode.ExtensionContext) {
             setStatusBarText('Generating', qpSelection.label);
             
             var pandocOptions = getPandocOptions(qpSelection.label);
+
+            if (pandocOptions === undefined)
+                pandocOptions = ''
             
             // debug
             console.log('debug: outFile = ' + inFile);
