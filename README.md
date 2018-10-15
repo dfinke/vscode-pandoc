@@ -52,7 +52,10 @@ example:
 "pandoc.docxOptString": "",
 
 // pandoc .html output option template that you would like to use
-"pandoc.htmlOptString": ""
+"pandoc.htmlOptString": "",
+
+// path to the pandoc executable. By default gets from PATH variable
+"pandoc.executable": ""
 ```
 
 * if necessary to set options for each output format.

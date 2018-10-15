@@ -47,7 +47,12 @@
             "type": "string",
             "default": "",
             "description": "pandoc .html output option template that you would like to use"
-          }
+					},
+					"pandoc.executable": {
+							"type": "string",
+							"default": "",
+							"description": "pandoc executable location if not specified in the PATH variable"
+					}
        }
      },
      "keybindings": [
