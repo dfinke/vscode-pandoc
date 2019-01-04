@@ -58,6 +58,13 @@ example:
 * if necessary to set options for each output format.
   * default: `$ pandoc inFile.md -o outFile.{pdf|word|html}`
 
+For adding additionnal output formats, just add `pandoc.<format>OptString` keys in your settings, with the proper pandoc options:
+
+```json
+// This will add an "epub" output format to vscode-pandoc
+"pandoc.epubOptString": "-t epub"
+```
+
 ## Example: Setting for Japanese document
 
 * PDF
