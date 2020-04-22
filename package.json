@@ -2,12 +2,9 @@
 	"name": "vscode-pandoc",
 	"description": "Renders markdown through pandoc",
 	"version": "0.0.8",
-
 	"publisher": "DougFinke",
 	"icon": "images/logo.png",
-
 	"license": "SEE LICENSE",
-
 	"bugs": {
 		"url": "https://github.com/dfinke/vscode-pandoc/issues",
 		"email": "finked@hotmail.com"
@@ -17,7 +14,6 @@
 		"type": "git",
 		"url": "https://github.com/dfinke/vscode-pandoc.git"
 	},
-
 	"engines": {
 		"vscode": "^1.0.0"
 	},
@@ -25,51 +21,78 @@
 		"Other"
 	],
 	"activationEvents": [
-         "onLanguage:markdown"
+		"onLanguage:markdown",
+		"onLanguage:asciidoc",
+		"onLanguage:xml",
+		"onLanguage:html",
+		"onLanguage:epub",
+		"onLanguage:restructuredtext"
 	],
 	"main": "./out/src/extension",
 	"contributes": {
-     "configuration": {
-       "type": "object",
-       "title": "Pandoc Option Configuration",
-       "properties": {
-         "pandoc.pdfOptString": {
-           "type": "string",
-           "default": "",
-           "description": "pandoc .pdf output option template that you would like to use"
-          },
-          "pandoc.docxOptString": {
-            "type": "string",
-            "default": "",
-            "description": "pandoc .docx output option template that you would like to use"
-          },
-          "pandoc.htmlOptString": {
-            "type": "string",
-            "default": "",
-            "description": "pandoc .html output option template that you would like to use"
-          }
-       }
-     },
-     "keybindings": [
-       {
-         "command": "pandoc.render",
-         "key": "ctrl+K P",
-         "mac": "cmd+K P",
-         "when": "editorTextFocus && editorLangId == 'markdown'"
-       }
-     ],
-     "commands": [{
-			"command": "pandoc.render",
-			"title": "Pandoc Render"
-		}]
+		"configuration": {
+			"type": "object",
+			"title": "Pandoc Option Configuration",
+			"properties": {
+				"pandoc.pdfOptString": {
+					"type": "string",
+					"default": "",
+					"description": "pandoc .pdf output option template that you would like to use"
+				},
+				"pandoc.docxOptString": {
+					"type": "string",
+					"default": "",
+					"description": "pandoc .docx output option template that you would like to use"
+				},
+				"pandoc.htmlOptString": {
+					"type": "string",
+					"default": "",
+					"description": "pandoc .html output option template that you would like to use"
+				},
+				"pandoc.asciidocOptString": {
+					"type": "string",
+					"default": "",
+					"description": "pandoc .asciidoc output option template that you would like to use"
+				},
+				"pandoc.docbookOptString": {
+					"type": "string",
+					"default": "",
+					"description": "pandoc .xml output option template that you would like to use"
+				},
+				"pandoc.epubOptString": {
+					"type": "string",
+					"default": "",
+					"description": "pandoc .epub output option template that you would like to use"
+				},
+				"pandoc.rstOptString": {
+					"type": "string",
+					"default": "",
+					"description": "pandoc .rst output option template that you would like to use"
+				}
+			}
+		},
+		"keybindings": [
+			{
+				"command": "pandoc.render",
+				"key": "ctrl+K P",
+				"mac": "cmd+K P",
+				"when": "editorTextFocus && editorLangId == 'markdown'"
+			}
+		],
+		"commands": [
+			{
+				"command": "pandoc.render",
+				"title": "Pandoc Render"
+			}
+		]
 	},
 	"scripts": {
 		"vscode:prepublish": "node ./node_modules/vscode/bin/compile",
 		"compile": "node ./node_modules/vscode/bin/compile -watch -p ./",
 		"postinstall": "node ./node_modules/vscode/bin/install"
-},
+	},
 	"devDependencies": {
-        "typescript": "^1.8.5",
-        "vscode": "^0.11.0"
+		"typescript": "^1.8.5",
+		"vscode": "^0.11.0"
 	}
 }
