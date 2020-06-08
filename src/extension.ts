@@ -47,6 +47,19 @@ function getPandocOptions(quickPickLabel) {
     return pandocOptions;
 }
 
+function openDocument(outFile: string) {
+    switch (process.platform) {
+        case 'darwin':
+            exec('open ' + outFile);
+            break;
+        case 'linux':
+            exec('xdg-open ' + outFile);
+            break;
+        default:
+            exec(outFile);
+    }
+}
+
 export function activate(context: vscode.ExtensionContext) {
 
     console.log('Congratulations, your extension "vscode-pandoc" is now active!');
@@ -108,17 +121,13 @@ export function activate(context: vscode.ExtensionContext) {
                     vscode.window.showErrorMessage('exec error: ' + error);
                     pandocOutputChannel.append('exec error: ' + error + '\n');
                 } else {
-                    setStatusBarText('Launching', qpSelection.label);
-                    switch (process.platform) {
-                        case 'darwin':
-                            exec('open ' + outFile);
-                            break;
-                        case 'linux':
-                            exec('xdg-open ' + outFile);
-                            break;
-                        default:
-                            exec(outFile);
+                    var openViewer = vscode.workspace.getConfiguration('pandoc').get('render.openViewer');
+
+                    if (openViewer) {
+                        setStatusBarText('Launching', qpSelection.label);
+                        openDocument(outFile);
                     }
+
                 }
             });
         });
