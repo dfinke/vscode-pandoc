@@ -62,10 +62,11 @@ function openDocument(outFile: string) {
 
 function getPandocExecutablePath() {
     // By default pandoc executable should be in the PATH environment variable.
-    var pandocExecutablePath = 'pandoc';
+    var pandocExecutablePath: string = 'pandoc';
+    console.log(vscode.workspace.getConfiguration('pandoc').get('executable'));
     if (vscode.workspace.getConfiguration('pandoc').has('executable') && 
         vscode.workspace.getConfiguration('pandoc').get('executable') !== '') {
-        pandocExecutablePath = vscode.workspace.getConfiguration('pandoc').get('executable');
+        pandocExecutablePath = vscode.workspace.getConfiguration('pandoc').get<string>('executable');
     }
     return pandocExecutablePath;
 }

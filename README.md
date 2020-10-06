@@ -23,6 +23,9 @@ Then choose from the list what document type you want to render and press `enter
 
 ## Releases
 
+* October 6th, 2020
+  * Add ability to specify pandoc binary thanks @feeper
+  * Stops rendered document opening automatically thanks @bno93
 * April 22nd, 2020
   * Shift to new fork
   * Expose further conversion options
