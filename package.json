@@ -34,6 +34,11 @@
 			"type": "object",
 			"title": "Pandoc Option Configuration",
 			"properties": {
+				"pandoc.executable": {
+					"type": "string",
+					"default": "",
+					"description": "pandoc executable location"
+				},
 				"pandoc.pdfOptString": {
 					"type": "string",
 					"default": "",
@@ -70,7 +75,7 @@
 					"description": "pandoc .rst output option template that you would like to use"
 				},
 				"pandoc.render.openViewer": {
-					"type":"boolean",
+					"type": "boolean",
 					"default": "true",
 					"description": "specify if the extension will open the rendered document in it's default viewer"
 				}

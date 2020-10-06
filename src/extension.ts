@@ -60,6 +60,16 @@ function openDocument(outFile: string) {
     }
 }
 
+function getPandocExecutablePath() {
+    // By default pandoc executable should be in the PATH environment variable.
+    var pandocExecutablePath = 'pandoc';
+    if (vscode.workspace.getConfiguration('pandoc').has('executable') && 
+        vscode.workspace.getConfiguration('pandoc').get('executable') !== '') {
+        pandocExecutablePath = vscode.workspace.getConfiguration('pandoc').get('executable');
+    }
+    return pandocExecutablePath;
+}
+
 export function activate(context: vscode.ExtensionContext) {
 
     console.log('Congratulations, your extension "vscode-pandoc" is now active!');
@@ -97,9 +107,12 @@ export function activate(context: vscode.ExtensionContext) {
             console.log('debug: outFile = ' + inFile);
             console.log('debug: inFile = ' + outFile);
             console.log('debug: pandoc ' + inFile + ' -o ' + outFile + pandocOptions);
-
+            
             var space = '\x20';
-            var targetExec = 'pandoc' + space + inFile + space + '-o' + space + outFile + space + pandocOptions;
+            var pandocExecutablePath = getPandocExecutablePath();
+            console.log('debug: pandoc executable path = ' + pandocExecutablePath);
+
+            var targetExec = '"' + pandocExecutablePath + '"' + space + inFile + space + '-o' + space + outFile + space + pandocOptions;
             console.log('debug: exec ' + targetExec);
 
             var child = exec(targetExec, { cwd: filePath }, function (error, stdout, stderr) {
