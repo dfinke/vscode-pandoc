@@ -1,7 +1,7 @@
 {
 	"name": "vscode-pandoc",
 	"description": "Renders markdown through pandoc",
-	"version": "0.4.0",
+	"version": "0.4.1",
 	"publisher": "ChrisChinchilla",
 	"icon": "images/logo.png",
 	"license": "SEE LICENSE",
@@ -15,7 +15,7 @@
 		"url": "https://github.com/chrischinchilla/vscode-pandoc.git"
 	},
 	"engines": {
-		"vscode": "^1.43.0"
+		"vscode": "^1.63.1"
 	},
 	"categories": [
 		"Other"
