@@ -16,31 +16,24 @@ function getPandocOptions(quickPickLabel: string) {
     switch (quickPickLabel) {
         case 'pdf':
             pandocOptions = vscode.workspace.getConfiguration('pandoc').get('pdfOptString');
-            console.log('pdocOptstring = ' + pandocOptions);
             break;
         case 'docx':
             pandocOptions = vscode.workspace.getConfiguration('pandoc').get('docxOptString');
-            console.log('pdocOptstring = ' + pandocOptions);
             break;
         case 'html':
             pandocOptions = vscode.workspace.getConfiguration('pandoc').get('htmlOptString');
-            console.log('pdocOptstring = ' + pandocOptions);
             break;
         case 'asciidoc':
             pandocOptions = vscode.workspace.getConfiguration('pandoc').get('asciidocOptString');
-            console.log('pdocOptstring = ' + pandocOptions);
             break;
         case 'docbook':
             pandocOptions = vscode.workspace.getConfiguration('pandoc').get('docbookOptString');
-            console.log('pdocOptstring = ' + pandocOptions);
             break;
         case 'epub':
             pandocOptions = vscode.workspace.getConfiguration('pandoc').get('epubOptString');
-            console.log('pdocOptstring = ' + pandocOptions);
             break;
         case 'rst':
             pandocOptions = vscode.workspace.getConfiguration('pandoc').get('rstOptString');
-            console.log('pdocOptstring = ' + pandocOptions);
             break;
     }
 
@@ -73,8 +66,6 @@ function getPandocExecutablePath() {
 
 export function activate(context: vscode.ExtensionContext) {
 
-    // console.log('Congratulations, your extension "vscode-pandoc" is now active!');
-
     var disposable = vscode.commands.registerCommand('pandoc.render', () => {
 
         const editor = vscode.window.activeTextEditor;
@@ -106,29 +97,20 @@ export function activate(context: vscode.ExtensionContext) {
             setStatusBarText('Generating', qpSelection.label);
 
             var pandocOptions = getPandocOptions(qpSelection.label);
-
-            // debug
-            console.log('debug: outFile = ' + inFile);
-            console.log('debug: inFile = ' + outFile);
-            console.log('debug: pandoc ' + inFile + ' -o ' + outFile + pandocOptions);
             
             var pandocExecutablePath = getPandocExecutablePath();
-            console.log('debug: pandoc executable path = ' + pandocExecutablePath);
 
             var useDocker = vscode.workspace.getConfiguration('pandoc').get('useDocker');
             var targetExec = useDocker 
                 ? `docker run --rm -v "${filePath}:/data" pandoc/latex:latest "${fileName}" -o "${fileNameOnly}.${qpSelection.label}" ${pandocOptions}`
                 : `"${pandocExecutablePath}" ${inFile} -o ${outFile} ${pandocOptions}`;
-            console.log('debug: exec ' + targetExec);
 
             var child = exec(targetExec, { cwd: filePath }, function (error, stdout, stderr) {
                 if (stdout !== null) {
-                    console.log(stdout.toString());
                     pandocOutputChannel.append(stdout.toString() + '\n');
                 }
 
                 if (stderr !== null) {
-                    console.log(stderr.toString());
                     if (stderr !== "") {
                         vscode.window.showErrorMessage('stderr: ' + stderr.toString());
                         pandocOutputChannel.append('stderr: ' + stderr.toString() + '\n');
@@ -136,7 +118,6 @@ export function activate(context: vscode.ExtensionContext) {
                 }
 
                 if (error !== null) {
-                    console.log('exec error: ' + error);
                     vscode.window.showErrorMessage('exec error: ' + error);
                     pandocOutputChannel.append('exec error: ' + error + '\n');
                 } else {

@@ -1,1 +1,239 @@
-(()=>{"use strict";var e={112:function(e,o,t){var n=this&&this.__createBinding||(Object.create?function(e,o,t,n){void 0===n&&(n=t),Object.defineProperty(e,n,{enumerable:!0,get:function(){return o[t]}})}:function(e,o,t,n){void 0===n&&(n=t),e[n]=o[t]}),r=this&&this.__setModuleDefault||(Object.create?function(e,o){Object.defineProperty(e,"default",{enumerable:!0,value:o})}:function(e,o){e.default=o}),a=this&&this.__importStar||function(e){if(e&&e.__esModule)return e;var o={};if(null!=e)for(var t in e)"default"!==t&&Object.prototype.hasOwnProperty.call(e,t)&&n(o,e,t);return r(o,e),o};Object.defineProperty(o,"__esModule",{value:!0}),o.activate=void 0;const c=a(t(496)),i=t(81),s=a(t(17));var p=c.window.createOutputChannel("Pandoc");function d(e,o){var t=e+" ["+o+"] "+(new Date).toLocaleTimeString();c.window.setStatusBarMessage(t,1500)}o.activate=function(e){var o=c.commands.registerCommand("pandoc.render",(()=>{const e=c.window.activeTextEditor;if(!e)return;let o=s.normalize(e.document.fileName);var t=s.dirname(o),n=s.basename(o),r=s.parse(n).name;let a=[];a.push({label:"pdf",description:"Render as pdf document"}),a.push({label:"docx",description:"Render as word document"}),a.push({label:"html",description:"Render as html document"}),a.push({label:"asciidoc",description:"Render as asciidoc document"}),a.push({label:"docbook",description:"Render as docbook document"}),a.push({label:"epub",description:"Render as epub document"}),a.push({label:"rst",description:"Render as rst document"}),c.window.showQuickPick(a).then((e=>{if(e){var o=s.join(t,n).replace(/(^.*$)/gm,'"$1"'),a=(s.join(t,r)+"."+e.label).replace(/(^.*$)/gm,'"$1"');d("Generating",e.label);var l=function(e){var o;switch(e){case"pdf":o=c.workspace.getConfiguration("pandoc").get("pdfOptString"),console.log("pdocOptstring = "+o);break;case"docx":o=c.workspace.getConfiguration("pandoc").get("docxOptString"),console.log("pdocOptstring = "+o);break;case"html":o=c.workspace.getConfiguration("pandoc").get("htmlOptString"),console.log("pdocOptstring = "+o);break;case"asciidoc":o=c.workspace.getConfiguration("pandoc").get("asciidocOptString"),console.log("pdocOptstring = "+o);break;case"docbook":o=c.workspace.getConfiguration("pandoc").get("docbookOptString"),console.log("pdocOptstring = "+o);break;case"epub":o=c.workspace.getConfiguration("pandoc").get("epubOptString"),console.log("pdocOptstring = "+o);break;case"rst":o=c.workspace.getConfiguration("pandoc").get("rstOptString"),console.log("pdocOptstring = "+o)}return o}(e.label);console.log("debug: outFile = "+o),console.log("debug: inFile = "+a),console.log("debug: pandoc "+o+" -o "+a+l);var u=function(){var e;return console.log(c.workspace.getConfiguration("pandoc").get("executable")),c.workspace.getConfiguration("pandoc").has("executable")&&""!==c.workspace.getConfiguration("pandoc").get("executable")&&(e=c.workspace.getConfiguration("pandoc").get("executable")),e}();console.log("debug: pandoc executable path = "+u);var g='"'+u+'" '+o+" -o "+a+" "+l;console.log("debug: exec "+g),(0,i.exec)(g,{cwd:t},(function(o,t,n){null!==t&&(console.log(t.toString()),p.append(t.toString()+"\n")),null!==n&&(console.log(n.toString()),""!==n&&(c.window.showErrorMessage("stderr: "+n.toString()),p.append("stderr: "+n.toString()+"\n"))),null!==o?(console.log("exec error: "+o),c.window.showErrorMessage("exec error: "+o),p.append("exec error: "+o+"\n")):c.workspace.getConfiguration("pandoc").get("render.openViewer")&&(d("Launching",e.label),function(e){switch(process.platform){case"darwin":(0,i.exec)("open "+e);break;case"linux":(0,i.exec)("xdg-open "+e);break;default:(0,i.exec)(e)}}(a))}))}}))}));e.subscriptions.push(o)}},496:e=>{e.exports=require("vscode")},81:e=>{e.exports=require("child_process")},17:e=>{e.exports=require("path")}},o={},t=function t(n){var r=o[n];if(void 0!==r)return r.exports;var a=o[n]={exports:{}};return e[n].call(a.exports,a,a.exports,t),a.exports}(112);module.exports=t})();
+/******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
+/******/ 	var __webpack_modules__ = ({
+
+/***/ "vscode":
+/*!*************************!*\
+  !*** external "vscode" ***!
+  \*************************/
+/***/ ((module) => {
+
+module.exports = require("vscode");
+
+/***/ }),
+
+/***/ "child_process":
+/*!********************************!*\
+  !*** external "child_process" ***!
+  \********************************/
+/***/ ((module) => {
+
+module.exports = require("child_process");
+
+/***/ }),
+
+/***/ "path":
+/*!***********************!*\
+  !*** external "path" ***!
+  \***********************/
+/***/ ((module) => {
+
+module.exports = require("path");
+
+/***/ })
+
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	(() => {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__webpack_require__.n = (module) => {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				() => (module['default']) :
+/******/ 				() => (module);
+/******/ 			__webpack_require__.d(getter, { a: getter });
+/******/ 			return getter;
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/************************************************************************/
+var __webpack_exports__ = {};
+// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
+(() => {
+/*!**************************!*\
+  !*** ./src/extension.ts ***!
+  \**************************/
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   activate: () => (/* binding */ activate)
+/* harmony export */ });
+/* harmony import */ var vscode__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vscode */ "vscode");
+/* harmony import */ var vscode__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vscode__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var child_process__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! child_process */ "child_process");
+/* harmony import */ var child_process__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(child_process__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! path */ "path");
+/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_2__);
+
+
+
+var pandocOutputChannel = vscode__WEBPACK_IMPORTED_MODULE_0__.window.createOutputChannel('Pandoc');
+function setStatusBarText(what, docType) {
+    var date = new Date();
+    var text = what + ' [' + docType + '] ' + date.toLocaleTimeString();
+    vscode__WEBPACK_IMPORTED_MODULE_0__.window.setStatusBarMessage(text, 1500);
+}
+function getPandocOptions(quickPickLabel) {
+    var pandocOptions;
+    switch (quickPickLabel) {
+        case 'pdf':
+            pandocOptions = vscode__WEBPACK_IMPORTED_MODULE_0__.workspace.getConfiguration('pandoc').get('pdfOptString');
+            break;
+        case 'docx':
+            pandocOptions = vscode__WEBPACK_IMPORTED_MODULE_0__.workspace.getConfiguration('pandoc').get('docxOptString');
+            break;
+        case 'html':
+            pandocOptions = vscode__WEBPACK_IMPORTED_MODULE_0__.workspace.getConfiguration('pandoc').get('htmlOptString');
+            break;
+        case 'asciidoc':
+            pandocOptions = vscode__WEBPACK_IMPORTED_MODULE_0__.workspace.getConfiguration('pandoc').get('asciidocOptString');
+            break;
+        case 'docbook':
+            pandocOptions = vscode__WEBPACK_IMPORTED_MODULE_0__.workspace.getConfiguration('pandoc').get('docbookOptString');
+            break;
+        case 'epub':
+            pandocOptions = vscode__WEBPACK_IMPORTED_MODULE_0__.workspace.getConfiguration('pandoc').get('epubOptString');
+            break;
+        case 'rst':
+            pandocOptions = vscode__WEBPACK_IMPORTED_MODULE_0__.workspace.getConfiguration('pandoc').get('rstOptString');
+            break;
+    }
+    return pandocOptions;
+}
+function openDocument(outFile) {
+    switch (process.platform) {
+        case 'darwin':
+            (0,child_process__WEBPACK_IMPORTED_MODULE_1__.exec)('open ' + outFile);
+            break;
+        case 'linux':
+            (0,child_process__WEBPACK_IMPORTED_MODULE_1__.exec)('xdg-open ' + outFile);
+            break;
+        default:
+            (0,child_process__WEBPACK_IMPORTED_MODULE_1__.exec)(outFile);
+    }
+}
+function getPandocExecutablePath() {
+    // By default pandoc executable should be in the PATH environment variable.
+    var pandocExecutablePath;
+    console.log(vscode__WEBPACK_IMPORTED_MODULE_0__.workspace.getConfiguration('pandoc').get('executable'));
+    if (vscode__WEBPACK_IMPORTED_MODULE_0__.workspace.getConfiguration('pandoc').has('executable') &&
+        vscode__WEBPACK_IMPORTED_MODULE_0__.workspace.getConfiguration('pandoc').get('executable') !== '') {
+        pandocExecutablePath = vscode__WEBPACK_IMPORTED_MODULE_0__.workspace.getConfiguration('pandoc').get('executable');
+    }
+    return pandocExecutablePath;
+}
+function activate(context) {
+    var disposable = vscode__WEBPACK_IMPORTED_MODULE_0__.commands.registerCommand('pandoc.render', () => {
+        const editor = vscode__WEBPACK_IMPORTED_MODULE_0__.window.activeTextEditor;
+        if (!editor) {
+            return;
+        }
+        let fullName = path__WEBPACK_IMPORTED_MODULE_2__.normalize(editor.document.fileName);
+        var filePath = path__WEBPACK_IMPORTED_MODULE_2__.dirname(fullName);
+        var fileName = path__WEBPACK_IMPORTED_MODULE_2__.basename(fullName);
+        var fileNameOnly = path__WEBPACK_IMPORTED_MODULE_2__.parse(fileName).name;
+        let items = [];
+        items.push({ label: 'pdf', description: 'Render as pdf document' });
+        items.push({ label: 'docx', description: 'Render as word document' });
+        items.push({ label: 'html', description: 'Render as html document' });
+        items.push({ label: 'asciidoc', description: 'Render as asciidoc document' });
+        items.push({ label: 'docbook', description: 'Render as docbook document' });
+        items.push({ label: 'epub', description: 'Render as epub document' });
+        items.push({ label: 'rst', description: 'Render as rst document' });
+        vscode__WEBPACK_IMPORTED_MODULE_0__.window.showQuickPick(items).then((qpSelection) => {
+            if (!qpSelection) {
+                return;
+            }
+            var inFile = path__WEBPACK_IMPORTED_MODULE_2__.join(filePath, fileName).replace(/(^.*$)/gm, "\"" + "$1" + "\"");
+            var outFile = (path__WEBPACK_IMPORTED_MODULE_2__.join(filePath, fileNameOnly) + '.' + qpSelection.label).replace(/(^.*$)/gm, "\"" + "$1" + "\"");
+            setStatusBarText('Generating', qpSelection.label);
+            var pandocOptions = getPandocOptions(qpSelection.label);
+            var pandocExecutablePath = getPandocExecutablePath();
+            var useDocker = vscode__WEBPACK_IMPORTED_MODULE_0__.workspace.getConfiguration('pandoc').get('useDocker');
+            var targetExec = useDocker
+                ? `docker run --rm -v "${filePath}:/data" pandoc/latex:latest "${fileName}" -o "${fileNameOnly}.${qpSelection.label}" ${pandocOptions}`
+                : `"${pandocExecutablePath}" ${inFile} -o ${outFile} ${pandocOptions}`;
+            var child = (0,child_process__WEBPACK_IMPORTED_MODULE_1__.exec)(targetExec, { cwd: filePath }, function (error, stdout, stderr) {
+                if (stdout !== null) {
+                    pandocOutputChannel.append(stdout.toString() + '\n');
+                }
+                if (stderr !== null) {
+                    if (stderr !== "") {
+                        vscode__WEBPACK_IMPORTED_MODULE_0__.window.showErrorMessage('stderr: ' + stderr.toString());
+                        pandocOutputChannel.append('stderr: ' + stderr.toString() + '\n');
+                    }
+                }
+                if (error !== null) {
+                    vscode__WEBPACK_IMPORTED_MODULE_0__.window.showErrorMessage('exec error: ' + error);
+                    pandocOutputChannel.append('exec error: ' + error + '\n');
+                }
+                else {
+                    var openViewer = vscode__WEBPACK_IMPORTED_MODULE_0__.workspace.getConfiguration('pandoc').get('render.openViewer');
+                    if (openViewer) {
+                        setStatusBarText('Launching', qpSelection.label);
+                        openDocument(outFile);
+                    }
+                }
+            });
+        });
+    });
+    context.subscriptions.push(disposable);
+}
+
+})();
+
+module.exports = __webpack_exports__;
+/******/ })()
+;
