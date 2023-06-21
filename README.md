@@ -71,9 +71,9 @@ example:
 
 * PDF
 
-  `"pandoc.pdfOptString": "--latex-engine=lualatex -V documentclass=ltjarticle -V geometry:a4paper -V geometry:margin=2.5cm -V geometry:nohead",`
+  `"pandoc.pdfOptString": "--pdf-engine=lualatex -V documentclass=ltjarticle -V geometry:a4paper -V geometry:margin=2.5cm -V geometry:nohead",`
 
-  * `--latex-engine=lualatex`: need to create a Japanese PDF
+  * `--pdf-engine=lualatex`: need to create a Japanese PDF
   * `-V documentclass=ltjarticle`: need to create a Japanese PDF
   * `-V geometry:a4paper -V geometry:margin=2.5cm -V geometry:nohead"`: geometory options
 
