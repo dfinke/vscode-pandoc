@@ -8,6 +8,8 @@ _Thanks to the previous work of [@dfinke](https://github.com/dfinke) on this ext
 
 You need to [**install Pandoc**](http://pandoc.org/installing.html) - a universal document converter.
 
+Alternatively you may set the `useDocker` option to true and it will run Pandoc in a container using the latest official [pandoc/latex](https://hub.docker.com/r/pandoc/latex) image. This could result in a delay the first time it runs, or after an update to the container while it pulls down the new image.
+
 ## Usage
 
 Two ways to run the extension. You need to have a markdown file open.
@@ -62,6 +64,9 @@ example:
 
 // path to the pandoc executable. By default gets from PATH variable
 "pandoc.executable": ""
+
+// enable running pandoc in a docker container
+"pandoc.useDocker": "true"
 ```
 
 * if necessary to set options for each output format.

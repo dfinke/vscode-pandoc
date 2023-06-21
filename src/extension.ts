@@ -112,11 +112,13 @@ export function activate(context: vscode.ExtensionContext) {
             console.log('debug: inFile = ' + outFile);
             console.log('debug: pandoc ' + inFile + ' -o ' + outFile + pandocOptions);
             
-            var space = '\x20';
             var pandocExecutablePath = getPandocExecutablePath();
             console.log('debug: pandoc executable path = ' + pandocExecutablePath);
 
-            var targetExec = '"' + pandocExecutablePath + '"' + space + inFile + space + '-o' + space + outFile + space + pandocOptions;
+            var useDocker = vscode.workspace.getConfiguration('pandoc').get('useDocker');
+            var targetExec = useDocker 
+                ? `docker run --rm -v "${filePath}:/data" pandoc/latex:latest "${fileName}" -o "${fileNameOnly}.${qpSelection.label}" ${pandocOptions}`
+                : `"${pandocExecutablePath}" ${inFile} -o ${outFile} ${pandocOptions}`;
             console.log('debug: exec ' + targetExec);
 
             var child = exec(targetExec, { cwd: filePath }, function (error, stdout, stderr) {
