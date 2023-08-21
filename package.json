@@ -1,7 +1,7 @@
 {
   "name": "vscode-pandoc",
   "description": "Renders markdown through pandoc",
-  "version": "0.4.4",
+  "version": "0.4.5",
   "publisher": "ChrisChinchilla",
   "icon": "images/logo.png",
   "license": "SEE LICENSE",
@@ -35,7 +35,7 @@
   "contributes": {
     "configuration": {
       "type": "object",
-      "title": "Pandoc Option Configuration",
+      "title": "Pandoc options",
       "properties": {
         "pandoc.executable": {
           "type": "string",
@@ -79,12 +79,12 @@
         },
         "pandoc.render.openViewer": {
           "type": "boolean",
-          "default": "true",
+          "default": true,
           "description": "specify if the extension will open the rendered document in it's default viewer"
         },
         "pandoc.useDocker": {
           "type": "boolean",
-          "default": "false",
+          "default": false,
           "description": "specify if the extension will run pandoc from a docker container"
         }
       }
