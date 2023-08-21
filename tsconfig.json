@@ -1,12 +1,19 @@
 {
 	"compilerOptions": {
-		"module": "commonjs",
-		"target": "ES5",
+		"module": "es2022",
+		"moduleResolution": "node",
+		"target": "es2017",
+		"esModuleInterop": true,
 		"outDir": "out",
-		"noLib": true,
-		"sourceMap": true
+		"lib": [
+			"es6"
+		],
+		"sourceMap": true,
+		"rootDir": "src",
+		"strict": true
 	},
 	"exclude": [
-		"node_modules"
+		"node_modules",
+		".vscode-test"
 	]
 }
